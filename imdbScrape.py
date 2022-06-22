@@ -1,8 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 import time
-
-
+ 
+print("Sup")
 
 def getTop10Comedies():
     start = time.perf_counter()
@@ -100,7 +100,7 @@ def getTop10Comedies1():
             scanContinue = False
     for i in all_titles[0:100]:
             print(i)
-    finish = time.perf_counter()
+    finish = time.perf_counter() 
     print(f"{len(all_titles)}Results found in: {start - finish:0.4f} seconds")
 
 getTop10ComediesX()
