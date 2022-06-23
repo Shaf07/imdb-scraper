@@ -65,7 +65,7 @@ def getMovies():
     for key, values in combined.items():
         if values[1] > 50000 and values[1] < 80000:
             if values[0] >= 7.5:
-                print(f"{key} : {values[0]}✰ rating | {values[1]} votes.")
+                print(f"{key} :     {values[0]}✰ rating |     {values[1]} votes.")
     finish = time.perf_counter()
     print(f"Results found in: {start - finish:0.4f} seconds")
 
@@ -79,9 +79,11 @@ def getTVShows():
     genre = input("Which genre? ")
     optionRating = float(input("Enter minimum rating here: "))
     optionVoteCountMin = int(input("Enter minimum votes:  "))
-    optionVoteCountMax = int(input("Enter maximum vote count:   "))
+    optionVoteCountMax = int(input("Enter maximum vote count or '0' to skip:   "))
+    if optionVoteCountMax == 0:
+        optionVoteCountMax = 5000000
     start = time.perf_counter() #starts the counter to see how long results take
-    print("Retrieving results...")
+    print("Retrieving results (approx 30 seconds)...")
 
     res = requests.get(f"https://www.imdb.com/search/title/?title_type=tv_series,tv_miniseries&genres={genre}&sort=num_votes,desc&explore=genres") #the main page for the genre with votes in descending order
     soup = BeautifulSoup(res.content, 'html.parser') #will parse HTML content
@@ -136,7 +138,7 @@ def getTVShows():
     for key, values in combined.items():
         if values[1] > optionVoteCountMin and values[1] < optionVoteCountMax:
             if values[0] >= optionRating:
-                print(f"{key} : {values[0]}✰ rating | {values[1]} votes.")
+                print(f"{key} : {values[0]}✰ rating  |  {values[1]} votes.")
 
 
             
